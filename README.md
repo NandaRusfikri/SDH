@@ -9,17 +9,15 @@ Request :
 - Header :
   - Content-Type: application/json
   - Accept: application/json
-- Params-Body Raw Json :
+- form-body JSON :
 
 ```json
 {
-  "search": "find to column code, item, and email",
+  "search": "search code",
   "limit": 15,
   "offset": 3,
   "order_field": "id|asc",
-  "id_user": 7,
-  "time_start": "2021-01-01",
-  "time_end": "2021-12-31"
+  "id_user": 7
 }
 ```
 
@@ -57,11 +55,11 @@ Request :
 - Header :
   - Content-Type: application/json
   - Accept: application/json
-- Params-Body Raw Json :
+- form-body JSON :
 
 ```json
 {
-  "id": 9 // id_unit
+  "id_unit": 9 // id_unit
 }
 ```
 
@@ -124,24 +122,22 @@ Response :
 Request :
 
 - Method : POST
-- Endpoint : `localhost:6969/unit/slots`
+- Endpoint : `localhost:6969/unit/slot/list`
 - Header :
 
   - Content-Type: application/json
   - Accept: application/json
 
-- Params-Body Raw Json :
+- form-body JSON :
 
 ```json
 {
-  "id": 1, // id_unit,
-  "search": "name",
+  "id_unit": 1, // id_unit,
+  "search": "search name",
   "limit": 15,
   "offset": 3,
   "order_field": "id|asc",
-  "time_start": "2021-01-01",
-  "time_end": "2021-12-31"
-}
+
 ```
 
 Response :
@@ -160,7 +156,7 @@ Response :
     {
       "id": 2,
       "name": "Deni",
-      "date_of_death": "2021-08-12T10:52:11.062483+07:00",
+      "date_of_death": "2021-08-12 10:52:11",
       "id_status": 2,
       "status": "Not Available"
     }
@@ -168,30 +164,28 @@ Response :
 }
 ```
 
-create database nandarusfikri
+
 
 ## Get List Future Care
 
 Request :
 
 - Method : POST
-- Endpoint : `localhost:6969/unit/future_cares`
+- Endpoint : `localhost:6969/unit/future_care/list`
 - Header :
 
   - Content-Type: application/json
   - Accept: application/json
 
-- Params-Body Raw Json :
+- form-body JSON :
 
 ```json
 {
-  "id": 1, // id_unit,
-  "search": "name",
+  "id_unit": 1, // id_unit,
+  "search": "search name",
   "limit": 15,
   "offset": 3,
   "order_field": "id|asc",
-  "time_start": "2021-01-01",
-  "time_end": "2021-12-31"
 }
 ```
 
@@ -217,8 +211,6 @@ Response :
 }
 ```
 
-create database nandarusfikri
-
 ## Get List Family Tree
 
 Request :
@@ -230,16 +222,14 @@ Request :
   - Content-Type: application/json
   - Accept: application/json
 
-- Params-Body Raw Json :
+- form-body JSON :
 
 ```json
 {
   "search": "search by name, email, phone",
   "limit": 15,
   "offset": 3,
-  "order_field": "id|asc",
-  "time_start": "2021-01-01",
-  "time_end": "2021-12-31"
+  "order_field": "id|asc"
 }
 ```
 
@@ -273,27 +263,28 @@ Response :
 }
 ```
 
-create database nandarusfikri
 
 ## Create Family Tree
 
 Request :
 
 - Method : POST
-- Endpoint : `localhost:6969/family_tree`
+- Endpoint : `localhost:6969/family_tree/create`
 - Header :
 
   - Content-Type: application/json
   - Accept: application/json
 
-- Params-Body Raw Json :
+- form-body JSON :
 
 ```json
 {
-  "id_user": 1,
-  "email" : "dimas@gmail.com",
-  "phone" : "0812345678",
-
+  "id_user": 1, //
+  "name": "Leonel Dimas",
+  "email": "dimas@gmail.com",
+  "phone": "0812345678",
+  "id_relation": 1,
+  "photo": "path photo"
 }
 ```
 
@@ -301,30 +292,66 @@ Response :
 
 ```json
 {
-  "count": 5,
-  "items": [
-    {
-      "id": 11,
-      "name": "Dimas Nayoan",
-      "email": "dimas@gmail.com",
-      "phone": "0812345678",
-      "id_relation": 2,
-      "relation": "Ibu",
-      "photo": "path url photo",
-      "created_at": "30-03-2021 10:10:10"
-    },
-    {
-      "id": 11,
-      "name": "Jihan Nayoan",
-      "email": "jihan@gmail.com",
-      "phone": "0812345678",
-      "id_relation": 2,
-      "relation": "kakak",
-      "photo": "path url photo",
-      "created_at": "30-03-2021 10:10:10"
-    }
-  ]
+  "message": "success create family tree"
 }
 ```
 
 
+## Update Family Tree
+
+Request :
+
+- Method : PUT
+- Endpoint : `localhost:6969/family_tree/update`
+- Header :
+
+  - Content-Type: application/json
+  - Accept: application/json
+
+- form-body JSON :
+
+```json
+{
+  "id": 6, // id family tree
+  "name": "Leonel Dimas",
+  "email": "dimas@gmail.com",
+  "phone": "0812345678",
+  "id_relation": 1, // id relation ex ayah|ibu|nenek
+  "photo": "path photo"
+}
+```
+
+Response :
+
+```json
+{
+  "message": "success update family tree"
+}
+```
+
+
+
+## Delete Family Tree
+
+Request :
+
+- Method : DELETE
+- Endpoint : `localhost:6969/family_tree/delete?id=7`
+- Header :
+
+  - Content-Type: application/json
+  - Accept: application/json
+
+- Query Params :
+
+```yaml
+id: 7 # id family tree
+```
+
+Response :
+
+```json
+{
+  "message": "success delete family tree"
+}
+```
